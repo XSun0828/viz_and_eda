@@ -9,7 +9,8 @@ library(ggridges)
 
 knitr::opts_chunk$set(
   fig.width = 6,
-  
+  fig.asp = .6,
+  out.width = "90%"
 )
 ```
 
@@ -100,7 +101,32 @@ Which geoms do you want?
 ```{r}
 weather_df %>% 
   ggplot(aes(x = date, y = tmax, colcor = name)) +
-  geom_smooth(se = FALSE)
+  geom_smooth()
+```
+
+Let's try some other plots...
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmax, fill = name)) + 
+  geom_density(alpha = .3)
+```
+
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax)) %>% 
+  geom_hex()
+```
+
+## Univariate plots
+
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmax)) +
+  geom_histogram() + 
+  facet_grid(. ~ name)
 ```
 
 Let's try some other plots...
@@ -119,14 +145,15 @@ weather_df %>%
   geom_boxplot()
 ```
 
-Some people like violin plots
+Some people like violin plots????
 
 ```{r}
 weather_df %>% 
-  
+  ggplot(aes(x = name, y = tmax)) + 
+  geom_boxplot()
 ```
 
-What about ridge？
+What about ridges...
 
 ```{r}
 weather_df %>% 
@@ -136,12 +163,19 @@ weather_df %>%
 
 ## Embedding plots
 
-```{r, fig.width = 12}
+```{r}
 weather_df %>% 
   ggplot(aes(x = tmin, y = tmax, color = name)) +
   geom_point(alpha = .3)
 ```
 
+
+
+```{r, fig.width = 12}
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .3)
+```
 
 
 
